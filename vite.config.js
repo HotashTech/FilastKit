@@ -9,6 +9,7 @@ export default defineConfig({
                 'resources/css/app.css',
                 'resources/js/app.js',
                 'resources/css/filament/public/theme.css',
+                'resources/css/filament/termin/theme.css',
             ],
             refresh: true,
         }),

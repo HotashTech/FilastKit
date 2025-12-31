@@ -23,6 +23,7 @@ return RectorConfig::configure()
         __DIR__.'/resources',
         __DIR__.'/routes',
         __DIR__.'/tests',
+        __DIR__.'/functions.php',
     ])
     ->withCache(__DIR__.'/storage/rector', FileCacheStorage::class)
     ->withSetProviders(LaravelSetProvider::class)
