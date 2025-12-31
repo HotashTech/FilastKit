@@ -1,0 +1,84 @@
+name: CI Setup
+description: "Sets up the environment for jobs during CI workflow"
+
+inputs:
+  php-version:
+    description: "PHP version to use"
+    required: false
+    default: "8.4"
+  cache-suffix:
+    description: "Optional cache suffix to disambiguate caches across matrices (e.g., shard)"
+    required: false
+    default: ""
+
+runs:
+  using: composite
+  steps:
+    - name: 🐘 Setup PHP
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: ${{ inputs.php-version }}
+        extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, pdo_mysql, bcmath, soap, intl, gd, exif, iconv, imagick
+        tools: composer:v2
+        coverage: xdebug
+
+    - name: 📦 Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '22'
+        # Disable package manager cache to avoid stale optional deps issues
+
+    - name: 🔄 Set npm to v10
+      shell: bash
+      run: |
+        npm --version
+        npm i -g npm@10
+        npm --version
+
+    - name: ℹ Setup Problem Matches
+      shell: bash
+      run: |
+        echo "::add-matcher::${{ runner.tool_cache }}/php.json"
+        echo "::add-matcher::${{ runner.tool_cache }}/phpunit.json"
+
+    - name: 🗂 Get composer cache directory
+      id: composer-cache
+      shell: bash
+      run: echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
+
+    - name: Cache Composer Dependencies
+      uses: actions/cache@v5
+      with:
+        path: ${{ steps.composer-cache.outputs.dir }}
+        key: ${{ runner.os }}-composer-${{ github.workflow }}-${{ github.job }}-${{ inputs.cache-suffix }}-${{ hashFiles('composer.lock') }}
+        restore-keys: |
+          ${{ runner.os }}-composer-${{ github.workflow }}-${{ github.job }}-
+          ${{ runner.os }}-composer-
+
+    # npm cache disabled above; rely on clean installs
+
+    - name: 🔮 Install Composer Dependencies
+      shell: bash
+      run: composer install --no-progress --no-interaction --prefer-dist --optimize-autoloader
+
+    - name: 🧹 Clean node_modules and lockfile (fresh graph)
+      shell: bash
+      run: |
+        rm -rf node_modules || true
+        rm -f package-lock.json || true
+
+    - name: 📦 Install Node.js Dependencies (npm)
+      shell: bash
+      run: |
+        npm install --no-audit --no-fund --force
+
+    # Rollup native binary should be resolved by a fresh install above
+
+    - name: ⚙️ Prepare Application
+      shell: bash
+      run: |
+        php artisan config:clear
+        cp .env.example .env
+        php artisan key:generate
+        php artisan storage:link
+        npm run build

@@ -1,0 +1,34 @@
+name: CI Playwright Setup
+description: "Installs Playwright (npm, no-save), caches browsers, and ensures system deps are present."
+
+runs:
+  using: composite
+  steps:
+    - name: 🎭 Install Playwright (npm, no-save)
+      shell: bash
+      run: npm install --no-audit --no-fund --no-save playwright
+
+    - name: 🎭 Get Playwright version
+      id: playwright-version
+      shell: bash
+      run: echo "version=$(node -p 'require(\"playwright/package.json\").version')" >> $GITHUB_OUTPUT
+
+    - name: 🎭 Cache Playwright Browsers
+      uses: actions/cache@v5
+      id: playwright-cache
+      with:
+        path: ~/.cache/ms-playwright
+        key: ${{ runner.os }}-playwright-${{ steps.playwright-version.outputs.version }}
+
+    - name: 🎭 Install Playwright Browsers
+      if: steps.playwright-cache.outputs.cache-hit != 'true'
+      shell: bash
+      run: npx playwright install --with-deps
+
+    - name: 🎭 Install Playwright System Dependencies
+      if: steps.playwright-cache.outputs.cache-hit == 'true'
+      shell: bash
+      run: npx playwright install-deps
+
+
+

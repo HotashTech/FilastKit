@@ -1,0 +1,32 @@
+name: Deployment
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  deployment:
+    strategy:
+      fail-fast: true
+      matrix:
+        php: [8.4]
+
+    name: Deployment Check
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 👀 Checkout
+        uses: actions/checkout@v6
+
+      - name: 🪄 Setup Environment
+        uses: ./.github/actions/setup
+        with:
+          php-version: ${{ matrix.php }}
+          cache-suffix: deployment
+
+      - name: 🔄 Run Migrations
+        run: php artisan migrate --force -v

@@ -1,0 +1,20 @@
+name: CI MySQL Setup
+description: "Starts MySQL, creates the test database, and runs migrations."
+
+runs:
+  using: composite
+  steps:
+    - name: 🗄️ Setup Database (MySQL)
+      shell: bash
+      run: |
+        sudo systemctl enable mysql.service
+        sudo systemctl start mysql.service
+        mysql --host 127.0.0.1 -uroot -proot -e 'CREATE DATABASE IF NOT EXISTS laravel;'
+        mysql --host 127.0.0.1 -uroot -proot -e "SELECT @@global.secure_file_priv, @@global.local_infile"
+
+    - name: 🔄 Run Migrations
+      shell: bash
+      run: php artisan migrate --force -v
+
+
+

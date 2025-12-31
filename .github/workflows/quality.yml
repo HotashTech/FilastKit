@@ -1,0 +1,58 @@
+name: Fix Code Quality Issues
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  fix-quality:
+    name: Fix Code Quality Issues
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
+      pull-requests: write
+
+    steps:
+      - name: 👀 Checkout
+        uses: actions/checkout@v6
+        with:
+          ref: ${{ github.head_ref }}
+
+      - name: 🪄 Setup Environment
+        uses: ./.github/actions/setup
+        with:
+          php-version: 8.4
+          cache-suffix: quality
+
+      - name: 🔧 Fix Code Quality Issues
+        run: |
+          composer rector:run
+          composer lint:fix
+
+      - name: 🔍 Validate Composer
+        run: composer validate
+
+      - name: 🔍 Audit Composer Dependencies
+        run: composer audit
+
+      - name: 🧪 Run Quick Tests
+        run: composer test:quick
+
+      - name: 📝 Commit Changes
+        uses: stefanzweifel/git-auto-commit-action@v7
+        with:
+          commit_message: "fix: apply code quality improvements and dependency updates"
+          file_pattern: |
+            **/*.php
+            **/*.js
+            **/*.css
+            **/*.blade.php

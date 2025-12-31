@@ -1,59 +1,327 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Filament Starter Kit
+
+A modern Laravel 12+ **Filament** starter kit built with the TALL stack (Tailwind CSS, Alpine.js, Laravel, Livewire) and best practices for rapid application development.
 
 <p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
+<a href="https://github.com/HotashTech/FilastKit/actions"><img src="https://github.com/HotashTech/FilastKit/actions/workflows/tests.yml/badge.svg" alt="Build Status"></a>
+<a href="https://packagist.org/packages/hotash/FilastKit"><img src="https://img.shields.io/packagist/dt/hotash/FilastKit" alt="Total Downloads"></a>
+<a href="https://packagist.org/packages/hotash/FilastKit"><img src="https://img.shields.io/packagist/v/hotash/FilastKit" alt="Latest Stable Version"></a>
+<a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License"></a>
 </p>
 
-## About Laravel
+<details>
+<summary><strong>🚀 Features</strong></summary>
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+- **Laravel 12+** - Latest Laravel framework with modern PHP 8.4+ features
+- **Filament** - Admin panel scaffolding (pre-installed)
+- **TALL Stack** - Tailwind CSS v4, Alpine.js, Laravel, Livewire
+- **Modern Architecture** - Laravel 12 streamlined structure with bootstrap/app.php configuration
+- **Testing Ready** - Pest testing framework with comprehensive test setup
+- **Code Quality** - Laravel Pint for code formatting, PHPStan for static analysis
+- **Development Tools** - Vite for asset compilation, comprehensive development workflow
+- **CI/CD Ready** - GitHub Actions with unified workflows and matrix strategies
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+</details>
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+<details>
+<summary><strong>🛠️ Tech Stack</strong></summary>
 
-## Learning Laravel
+- **Backend**: Laravel 12+, PHP 8.4+
+- **Admin Panel**: Filament
+- **Frontend**: Tailwind CSS v4, Alpine.js, Livewire
+- **Testing**: Pest PHP
+- **Code Quality**: Laravel Pint, PHPStan
+- **Build Tool**: Vite
+- **Database**: MySQL/PostgreSQL/SQLite ready
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+</details>
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+<details>
+<summary><strong>📋 Requirements</strong></summary>
 
-## Laravel Sponsors
+- PHP 8.4 or higher
+- Composer
+- Node.js & NPM
+- Database (MySQL, PostgreSQL, or SQLite)
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+</details>
 
-### Premium Partners
+<details>
+<summary><strong>🚀 Quick Start</strong></summary>
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+### 1. Clone the repository
 
-## Contributing
+```bash
+git clone <your-repo-url>
+cd FilastKit
+```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+### 2. Install PHP dependencies
 
-## Code of Conduct
+```bash
+composer install
+```
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+### 3. Install Node.js dependencies
 
-## Security Vulnerabilities
+```bash
+npm install
+```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+### 4. Environment setup
 
-## License
+```bash
+cp .env.example .env
+php artisan key:generate
+```
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+### 5. Configure your database in `.env`
+
+```env
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=your_database
+DB_USERNAME=your_username
+DB_PASSWORD=your_password
+```
+
+### 6. Setup database and seed data
+
+```bash
+composer setup
+```
+
+### 7. Build assets
+
+```bash
+npm run build
+```
+
+### 8. Start development server
+
+```bash
+php artisan serve
+```
+
+</details>
+
+<details>
+<summary><strong>🎨 Development Workflow</strong></summary>
+
+### Available Composer Scripts
+
+```bash
+# Setup database (migrate fresh + seed)
+composer setup
+
+# Testing
+composer test:fix       # Run tests with fixes and improvements
+composer test:all       # Run all tests (linting, analysis, coverage, unit, browser)
+composer test:quick     # Quick test run
+composer test:unit      # Run only unit tests
+composer test:browser   # Run browser tests
+
+# Code quality
+composer lint:fix       # Fix code formatting
+composer lint:test      # Check code formatting
+composer analyse        # Static analysis (2GB memory limit)
+composer analyse:full   # Static analysis (unlimited memory)
+composer analyse:test   # Static analysis with ANSI output
+
+# Development
+composer dev            # Start all services (server, queue, logs, vite)
+composer queue          # Start queue worker
+composer schedule       # Start scheduler
+```
+
+</details>
+
+</details>
+
+<details>
+<summary><strong>📦 Asset Compilation</strong></summary>
+
+```bash
+# Development with hot reload
+npm run dev
+
+# Production build
+npm run build
+
+# Watch for changes
+npm run watch
+```
+
+</details>
+
+<details>
+<summary><strong>🔍 Code Quality</strong></summary>
+
+```bash
+# Format code and fix linting issues
+composer lint:fix
+
+# Check code quality without fixing
+composer lint:test
+
+# Run static analysis
+composer analyse:test
+
+# Run tests with fixes
+composer test:fix
+```
+
+</details>
+
+<details>
+<summary><strong>🏗️ Project Structure</strong></summary>
+
+```
+FilastKit/
+├── app/
+│   ├── Http/Controllers/     # Application controllers
+│   ├── Filament/             # Filament resources, pages, widgets, panels
+│   ├── Models/               # Eloquent models
+│   ├── Services/             # Business logic services
+│   └── Providers/            # Service providers
+├── bootstrap/
+│   ├── app.php              # Application configuration (Laravel 12+)
+│   └── providers.php        # Service providers
+├── config/                   # Configuration files
+├── database/
+│   ├── factories/           # Model factories
+│   ├── migrations/          # Database migrations
+│   └── seeders/             # Database seeders
+├── resources/
+│   ├── css/                 # CSS files
+│   ├── js/                  # JavaScript files
+│   └── views/               # Blade templates
+├── routes/
+│   ├── web.php              # Web routes
+│   └── console.php          # Console commands
+└── tests/                   # Pest tests
+```
+
+</details>
+
+<details>
+<summary><strong>🧪 Testing</strong></summary>
+
+This starter kit uses Pest for testing. Tests are located in the `tests/` directory:
+
+```bash
+# Run all tests with fixes and improvements
+composer test:fix
+
+# Run all tests (linting, analysis, coverage, unit, browser)
+composer test:all
+
+# Run specific test file
+php artisan test tests/Feature/ExampleTest.php
+
+# Run tests with filter
+php artisan test --filter=testName
+
+# Quick test run (without fixes)
+composer test:quick
+
+# Run only unit tests
+composer test:unit
+
+# Run browser tests
+composer test:browser
+```
+
+</details>
+
+<details>
+<summary><strong>📚 Key Laravel 12+ Features</strong></summary>
+
+- **Streamlined Structure**: No more `app/Console/Kernel.php` or `RouteServiceProvider`
+- **Bootstrap Configuration**: Configure routing, middleware, and exceptions in `bootstrap/app.php`
+- **Auto-registering Commands**: Commands in `app/Console/Commands/` are automatically available
+- **Modern PHP Features**: Constructor property promotion, typed properties, and more
+
+</details>
+
+<details>
+<summary><strong>🎯 Best Practices</strong></summary>
+
+- Use Form Request classes for validation
+- Keep controllers thin with business logic in services
+- Use Eloquent relationships over raw queries
+- Implement proper error handling and logging
+- Follow PSR-12 coding standards
+- Write comprehensive tests for all features
+
+</details>
+
+<details>
+<summary><strong>🔧 Configuration</strong></summary>
+
+### Laravel Pint
+
+Code formatting is configured in `pint.json` and follows PSR-12 standards.
+
+### PHPStan
+
+Static analysis is configured in `phpstan.neon` for code quality assurance.
+
+### Vite
+
+Frontend build tool configuration in `vite.config.js` for modern asset compilation.
+
+### GitHub Actions
+
+CI/CD workflows are configured with unified setup and matrix strategies:
+
+- **Tests**: Matrix strategy with 4 shards for parallel testing
+- **Quality**: Matrix strategy for pint, phpstan, rector, and composer checks
+- **Deployment**: Deployment validation and migration checks
+
+</details>
+
+<details>
+<summary><strong>📖 Documentation</strong></summary>
+
+- [Laravel Documentation](https://laravel.com/docs)
+- [Tailwind CSS v4](https://tailwindcss.com/docs)
+- [Alpine.js](https://alpinejs.dev/)
+- [Livewire](https://livewire.laravel.com/)
+- [Pest PHP](https://pestphp.com/)
+
+</details>
+
+<details>
+<summary><strong>🤝 Contributing</strong></summary>
+
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add some amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+</details>
+
+<details>
+<summary><strong>📄 License</strong></summary>
+
+This project is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+</details>
+
+<details>
+<summary><strong>🙏 Acknowledgments</strong></summary>
+
+- [Laravel Team](https://laravel.com) for the amazing framework
+- [Tailwind CSS](https://tailwindcss.com) for the utility-first CSS framework
+- [Alpine.js](https://alpinejs.dev/) for lightweight JavaScript framework
+- [Livewire](https://livewire.laravel.com/) for full-stack development
+- [Pest PHP](https://pestphp.com/) for elegant testing
+
+</details>
+
+---
+
+**Happy coding! 🚀**

@@ -1,30 +1,49 @@
 {
     "$schema": "https://getcomposer.org/schema.json",
-    "name": "laravel/laravel",
+    "name": "hotash/filastkit",
     "type": "project",
-    "description": "The skeleton application for the Laravel framework.",
-    "keywords": ["laravel", "framework"],
+    "description": "A modern Filament Laravel starter kit with best practices and developer tools.",
+    "keywords": [
+        "hotash",
+        "laravel",
+        "framework",
+        "start-kit",
+        "starter-kit",
+        "hotash-starter-kit",
+        "laravel-starter-kit",
+        "filament-starter-kit"
+    ],
     "license": "MIT",
     "require": {
-        "php": "^8.2",
-        "laravel/framework": "^12.0",
-        "laravel/tinker": "^2.10.1"
+        "php": "^8.4",
+        "laravel/framework": "^12.44",
+        "laravel/tinker": "^2.10.2",
+        "nunomaduro/essentials": "^1.0.1"
     },
     "require-dev": {
-        "fakerphp/faker": "^1.23",
-        "laravel/pail": "^1.2.2",
-        "laravel/pint": "^1.24",
-        "laravel/sail": "^1.41",
-        "mockery/mockery": "^1.6",
-        "nunomaduro/collision": "^8.6",
-        "pestphp/pest": "^4.2",
-        "pestphp/pest-plugin-laravel": "^4.0"
+        "barryvdh/laravel-debugbar": "^3.16.3",
+        "driftingly/rector-laravel": "^2.1.9",
+        "fakerphp/faker": "^1.24.1",
+        "larastan/larastan": "^3.8.1",
+        "laravel/boost": "^1.8.7",
+        "laravel/pail": "^1.2.4",
+        "laravel/pint": "^1.26",
+        "laravel/sail": "^1.51",
+        "mockery/mockery": "^1.6.12",
+        "nunomaduro/collision": "^8.8.3",
+        "pestphp/pest": "^4.3",
+        "pestphp/pest-plugin-browser": "^4.1.1",
+        "pestphp/pest-plugin-faker": "^4.0",
+        "pestphp/pest-plugin-laravel": "^4.0",
+        "pestphp/pest-plugin-livewire": "^4.0.1",
+        "pestphp/pest-plugin-type-coverage": "^4.0.3"
     },
     "autoload": {
         "psr-4": {
             "App\\": "app/",
             "Database\\Factories\\": "database/factories/",
-            "Database\\Seeders\\": "database/seeders/"
+            "Database\\Seeders\\": "database/seeders/",
+            "Rector\\Custom\\": "rector/"
         }
     },
     "autoload-dev": {
@@ -37,7 +56,9 @@
             "composer install",
             "@php -r \"file_exists('.env') || copy('.env.example', '.env');\"",
             "@php artisan key:generate",
-            "@php artisan migrate --force",
+            "@php artisan migrate:fresh --seed",
+            "@php artisan boost:install",
+            "@php artisan storage:link",
             "npm install",
             "npm run build"
         ],
@@ -54,7 +75,9 @@
             "@php artisan package:discover --ansi"
         ],
         "post-update-cmd": [
-            "@php artisan vendor:publish --tag=laravel-assets --ansi --force"
+            "@php artisan vendor:publish --tag=laravel-assets --ansi --force",
+            "@php artisan clear",
+            "@update:requirements"
         ],
         "post-root-package-install": [
             "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
@@ -66,7 +89,45 @@
         ],
         "pre-package-uninstall": [
             "Illuminate\\Foundation\\ComposerScripts::prePackageUninstall"
-        ]
+        ],
+        "update:requirements": [
+            "composer bump",
+            "npx npm-check-updates -u"
+        ],
+        "lint:fix": [
+            "pint",
+            "npm run lint:fix"
+        ],
+        "lint:test": [
+            "pint --test",
+            "npm run lint:test"
+        ],
+        "analyse": "phpstan analyse --memory-limit=2G",
+        "analyse:full": "phpstan analyse --memory-limit=-1",
+        "analyse:test": "@analyse --error-format=table --ansi",
+        "rector:run": "rector process --ansi",
+        "rector:dry": "rector --dry-run --ansi",
+        "test:type": "pest --type-coverage --min=100",
+        "test:unit": "pest --parallel --ci --colors=always --min=100",
+        "test:coverage": "pest --coverage",
+        "test:browser": "pest --group=browser",
+        "test:all": [
+            "@test:quick",
+            "@test:browser"
+        ],
+        "test:quick": [
+            "@lint:test",
+            "@analyse:test",
+            "@test:type",
+            "@test:unit"
+        ],
+        "test:fix": [
+            "@rector:run",
+            "@lint:fix",
+            "@test:all"
+        ],
+        "schedule": "npx concurrently -c \"#93c5fd\" \"php artisan schedule:work\" --names=schedule",
+        "queue": "npx concurrently -c \"#93c5fd\" \"php artisan queue:listen --tries=1\" --names=queue"
     },
     "extra": {
         "laravel": {
