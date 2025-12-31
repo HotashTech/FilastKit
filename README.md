@@ -4,8 +4,8 @@ A modern Laravel 12+ **Filament** starter kit built with the TALL stack (Tailwin
 
 <p align="center">
 <a href="https://github.com/HotashTech/FilastKit/actions"><img src="https://github.com/HotashTech/FilastKit/actions/workflows/tests.yml/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/hotash/FilastKit"><img src="https://img.shields.io/packagist/dt/hotash/FilastKit" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/hotash/FilastKit"><img src="https://img.shields.io/packagist/v/hotash/FilastKit" alt="Latest Stable Version"></a>
+<a href="https://packagist.org/packages/hotash/filastkit"><img src="https://img.shields.io/packagist/dt/hotash/filastkit" alt="Total Downloads"></a>
+<a href="https://packagist.org/packages/hotash/filastkit"><img src="https://img.shields.io/packagist/v/hotash/filastkit" alt="Latest Stable Version"></a>
 <a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License"></a>
 </p>
 
@@ -52,7 +52,7 @@ A modern Laravel 12+ **Filament** starter kit built with the TALL stack (Tailwin
 ### 1. Clone the repository
 
 ```bash
-git clone <your-repo-url>
+git clone https://github.com/HotashTech/FilastKit.git
 cd FilastKit
 ```
 
